@@ -1,4 +1,4 @@
-import { React, useContext, useState, useEffect, useRef } from 'react';
+import { React, useContext, useState } from 'react';
 import './game.css';
 import { gameContext } from './GameProvider';
 import './modal.css';
@@ -89,15 +89,16 @@ export default function Keyboard(props){
           if (answer.toLowerCase() === guess.toLowerCase()) {
             dispatch({type: ACTION.ADD, payload: guess});
             setModal_win(!win_modal);
-          } else if(LIST.includes(guess)) {
-            dispatch({type: ACTION.ADD, payload: guess});
-          }else{
-            setModal_noword(!noword_modal);
-          }
-          console.log(guessed_list.length);
-          // you may change it or move it
-          if(guessed_list.length === chance - 2){
-            setModal_lost(!lost_modal);
+          } else {
+            if(LIST.includes(guess)) {
+                dispatch({type: ACTION.ADD, payload: guess});
+            }else{
+                setModal_noword(!noword_modal);
+            }
+            // you may change it or move it
+            if(guessed_list.length === chance - 1){
+                setModal_lost(!lost_modal);
+            }
           }
         }
     }

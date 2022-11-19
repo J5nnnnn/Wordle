@@ -11,11 +11,10 @@ export default function Rule(props){
     const context = useContext(gameContext);
 
     let game_state = context.game_state;
-    let rule_pic, letter_in, letter_on, letter_off;
+    let rule_pic;
 
     if(game_state.isHard){
         rule_pic = example_hard;
-        letter_on = "V, I, L"
     }else{
         rule_pic = example_normal;
     }

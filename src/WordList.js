@@ -1,4 +1,5 @@
 const word = `
+abcdef
 Better
 Beyond
 Bishop
@@ -3248,10 +3249,12 @@ Ebonise
 Ebonite
 Ebriate
 Earring
+Seattle
+abcdefg
 `;
 
-const word_list = word.split('\n');
-const word_list_hard = word_hard.split('\n');
+export const word_list = word.split('\n');
+export const word_list_hard = word_hard.split('\n');
 
 // console.log(word_list)
-export default {word_list, word_list_hard};
+// export default {word_list, word_list_hard};

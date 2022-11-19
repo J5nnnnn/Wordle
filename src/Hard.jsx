@@ -74,7 +74,7 @@ export default function Hard(props) {
             let tmp = JSON.parse(DATA);
             if(tmp.guessed_list.length === 0 && tmp.temp_guess === ""){
             //   localStorage.removeItem("APP_LEFT_STATE")
-                if(tmp.isHard && tmp.isHard != game_state.isHard){
+                if(tmp.isHard && tmp.isHard !== game_state.isHard){
                     dispatch({type:ACTION.LEVEL});
                 }
             }else{

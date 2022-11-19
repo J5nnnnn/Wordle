@@ -1,4 +1,4 @@
-import { React, useContext, useState, useEffect, useRef } from 'react';
+import { React, useContext } from 'react';
 import './game.css';
 import { gameContext } from './GameProvider';
 import './modal.css';
@@ -6,7 +6,6 @@ import './modal.css';
 export default function GuessBoard(props) {
   const context = useContext(gameContext);
 
-  let dispatch = context.dispatch;
   let game_state = context.game_state;
   
 
