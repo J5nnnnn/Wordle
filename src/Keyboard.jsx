@@ -71,6 +71,7 @@ export default function Keyboard(props){
     }
 
     function onClick_key(letter) {
+        // debugger
         if(letter === 'del'){
             onClick_delete();
         }else if(letter === 'enter'){

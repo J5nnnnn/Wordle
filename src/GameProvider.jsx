@@ -1,8 +1,10 @@
 import React from 'react';
 import { useReducer } from 'react';
 import { createContext } from 'react';
-import test from "./WordList.txt";
+import {word_list , word_list_hard} from './WordList.js';
 
+console.log(word_list);
+console.log(word_list_hard)
 export const gameContext = createContext();
 
 export function GameProvider(props) {
@@ -17,29 +19,9 @@ export function GameProvider(props) {
     HARD: 'hard',
   };
 
-  const WORD_LIST = [
-    'abcdef',
-    'abroad',
-    'answer',
-    'Choose',
-    'Attend',
-    'Chance',
-    'August',
-    'Advice',
-    'Almost',
-    'Answer',
-    'Behind',
-    'Desert',
-    'Appeal',
-  ];
+  const WORD_LIST = word_list;
 
-  const WORD_LIST_HARD = ['Visible', 'Vehicle'];
-
-  const reader = new FileReader();
-
-//   fetch('WordList.txt').then(r=> r.text()).then(text => console.log(text))
-
-  console.log(fetch(test));
+  const WORD_LIST_HARD = word_list_hard;
 
   function game_state_reducer(state, action) {
     switch (action.type) {
