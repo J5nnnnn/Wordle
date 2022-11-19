@@ -92,13 +92,14 @@ export default function Keyboard(props){
           } else {
             if(LIST.includes(guess)) {
                 dispatch({type: ACTION.ADD, payload: guess});
+                // you may change it or move it
+                if(guessed_list.length === chance - 1){
+                    setModal_lost(!lost_modal);
+                }
             }else{
                 setModal_noword(!noword_modal);
             }
-            // you may change it or move it
-            if(guessed_list.length === chance - 1){
-                setModal_lost(!lost_modal);
-            }
+
           }
         }
     }
