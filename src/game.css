@@ -113,6 +113,31 @@
     touch-action: manipulation;
 }
 
+@keyframes flip_guess {
+    0% {
+      transform: perspective(400px) rotateY(0);
+      animation-timing-function: ease-out;
+    }
+    25% {
+        transform: perspective(400px) rotateY(45deg);
+        animation-timing-function: ease-out;
+        
+    }
+    50% {
+        transform: perspective(400px) rotateY(90deg);
+        animation-timing-function: ease-in;
+    }
+    75% {
+        transform: perspective(400px) rotateY(45deg);
+        animation-timing-function: ease-in;
+    }
+    100% {
+        transform: perspective(400px) rotateY(0deg);
+        animation-timing-function: ease-in;
+    }
+  }
+
+
 .key_space{
     flex:0.5;
 }

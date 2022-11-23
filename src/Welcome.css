@@ -40,23 +40,50 @@
 }
 
 .title_hard.change {
-  animation: change 0.7s;
+  animation: flip 0.7s;
   animation-direction: reverse;
 }
 
 .title.change {
-  animation: change 0.7s forwards;
+  animation: flip 0.7s forwards;
 }
 
-@keyframes change {
+/* @keyframes change {
   0% {
     color: rgb(248, 28, 28);
+    
   }
 
   100% {
     color: black;
   }
-}
+} */
+
+@keyframes flip {
+  0% {
+     transform: perspective(400px) rotateY(0);
+     animation-timing-function: ease-out;
+     color:rgb(248, 28, 28)
+  }
+  40% {
+     transform: perspective(400px) translateZ(150px) rotateY(170deg);
+     animation-timing-function: ease-out;
+     
+  }
+  50% {
+     transform: perspective(400px) translateZ(150px) rotateY(190deg) scale(1);
+     animation-timing-function: ease-in;
+  }
+  80% {
+     transform: perspective(400px) rotateY(360deg) scale(.95);
+     animation-timing-function: ease-in;
+  }
+  100% {
+     transform: perspective(400px) scale(1);
+     animation-timing-function: ease-in;
+     color: black;
+  }
+} 
 
 
 .button_welcome {

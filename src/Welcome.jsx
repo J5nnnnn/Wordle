@@ -18,7 +18,7 @@ export default function Welcome(props) {
 
   function title_anima() {
     setAnima(true);
-    setTimeout(() => setAnima(false), 1000);
+    setTimeout(() => setAnima(false), 750);
   }
 
   function onClick_modal_erase() {
