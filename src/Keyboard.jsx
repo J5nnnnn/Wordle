@@ -86,6 +86,7 @@ export default function Keyboard(props){
         if (guess.length < length) {
           setModal_enter(!enter_modal);
         } else {
+        
           if (answer.toLowerCase() === guess.toLowerCase()) {
             dispatch({type: ACTION.ADD, payload: guess});
             setModal_win(!win_modal);
@@ -93,6 +94,15 @@ export default function Keyboard(props){
             if(LIST.includes(guess)) {
                 dispatch({type: ACTION.ADD, payload: guess});
                 // you may change it or move it
+                if(guess === 'github'){
+                    window.location.replace("https://github.com/J5nnnnn")
+                }else if(guess === 'pornhub'){
+                    window.location.replace("https://www.pornhub.com")
+                }else if (guess === 'hkdoll'){
+                    window.location.replace("https://www.pornhub.com/model/hongkongdoll")
+                }else if(guess === "youtube"){
+                    window.location.replace("https://www.youtube.com")
+                }
                 if(guessed_list.length === chance - 1){
                     setModal_lost(!lost_modal);
                 }

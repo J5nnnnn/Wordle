@@ -57,8 +57,14 @@ export function GameProvider(props) {
       case 'add':
         console.log('before push', state.guessed_list);
         let tmp = state.guessed_list;
-        tmp.push(action.payload);
+        let used = state.key_used;
+        let word = action.payload;
+        tmp.push(word);
         console.log('after push', state.guessed_list);
+
+        for(let i = 0; i < word.length; i++){
+          used.set(word[i], used.has(word[i])? used.get(word[i]) + 1 : 1);
+        }
         return { ...state, guessed_list: tmp, curr_index: 0, temp_guess: '' };
       case 'reset':
         // will unmounting
@@ -93,6 +99,7 @@ export function GameProvider(props) {
     guessed_list: [],
     word: WORD_LIST[Math.floor(Math.random() * WORD_LIST.length)],
     curr_index: 0,
+    key_used: new Map(),
   };
 
   const [game_state, dispatch] = useReducer(game_state_reducer, initialState);
