@@ -33,6 +33,7 @@ export default function Rule(props){
 
                 <h1>How to Play</h1>
                 <div>Guess the Wordle in {game_state.chance} tries</div>
+                <li>A secret {game_state.letter_guess}-letter word will be generated at each game starts</li>
                 <li>Each guess must be a valid {game_state.letter_guess}-letter word.</li>
                 <li>The color of the tiles will change to show how close your guess was
                     to the word.

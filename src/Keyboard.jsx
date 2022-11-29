@@ -16,6 +16,7 @@ export default function Keyboard(props){
     let length = game_state.letter_guess;
     let answer = game_state.word;
     let chance = game_state.chance;
+    let used = game_state.key_used;
     let LIST = [];
     context.LIST.forEach(itm => {
         LIST.push(itm.toLowerCase());
@@ -80,7 +81,6 @@ export default function Keyboard(props){
             dispatch({ type: ACTION.APPEND, payload: letter });
         }
     }
-    console.log("current guess", game_state.temp_guess);
 
     function onClick_enter() {
         if (guess.length < length) {
@@ -109,7 +109,6 @@ export default function Keyboard(props){
             }else{
                 setModal_noword(!noword_modal);
             }
-
           }
         }
     }
@@ -129,19 +128,29 @@ export default function Keyboard(props){
             const row_list = [];
             row.forEach((keys)=>{
                 let temp;
+                let type = "key";
+                if(used.has(keys)){
+                    if(used.get(keys) === 1){
+                        type = "key right";
+                    }else if (used.get(keys) === 2){
+                        type = "key well";
+                    }else{
+                        type = "key wrong";
+                    }
+                }
                 if(keys === 'key_space'){
                     temp = (<div className= {keys} key={keys}> 
                             </div>);
                 }else if(keys === 'enter'){
-                    temp = (<button className='key' key={keys} id={keys} onClick={()=>{onClick_key(keys)}}>
+                    temp = (<button className={type} key={keys} id={keys} onClick={()=>{onClick_key(keys)}}>
                             {'enter'}
                             </button>);
                 }else if(keys === 'del'){
-                    temp = (<button className='key' key={keys} onClick={()=>{onClick_key(keys)}}>
+                    temp = (<button className={type} key={keys} onClick={()=>{onClick_key(keys)}}>
                             {'←'}
                             </button>);
                 }else{
-                    temp = (<button className='key' key={keys} onClick={()=>{onClick_key(keys)}}>
+                    temp = (<button className={type} key={keys} onClick={()=>{onClick_key(keys)}}>
                         {keys}
                         </button>);
                 }

@@ -7,7 +7,6 @@ export default function GuessBoard(props) {
   const context = useContext(gameContext);
 
   let game_state = context.game_state;
-  
 
   let answer = game_state.word;
 
@@ -17,31 +16,32 @@ export default function GuessBoard(props) {
   let guess = game_state.temp_guess;
   let row_style, board_style;
 
-  if(game_state.isHard){
-    row_style = "guess_row_hard";
-    board_style = "guess_board_hard";
-  }else{
-    row_style = "guess_row_normal";
-    board_style = "guess_board_normal";
+  if (game_state.isHard) {
+    row_style = 'guess_row_hard';
+    board_style = 'guess_board_hard';
+  } else {
+    row_style = 'guess_row_normal';
+    board_style = 'guess_board_normal';
   }
 
-  function check_correct(ans, gus){
+  function check_correct(ans, gus) {
     let res = [];
     const map = new Map();
 
-    for(let i = 0; i < col; i++){
+    for (let i = 0; i < col; i++) {
       map.set(ans[i], map.has(ans[i]) ? map.get(ans[i]) + 1 : 1);
-      if(ans[i].toLowerCase() === gus[i].toLowerCase()){
-        res[i] = "guess right";
+      if (ans[i].toLowerCase() === gus[i].toLowerCase()) {
+        res[i] = 'guess right';
         map.set(ans[i], map.get(ans[i]) - 1);
       }
     }
 
-    for(let i = 0; i < col; i++){
-      if(res[i] === undefined){
-        if(map.has(gus[i]) && map.get(gus[i]) !== 0){
+    for (let i = 0; i < col; i++) {
+      if (res[i] === undefined) {
+        if (map.has(gus[i]) && map.get(gus[i]) !== 0) {
           res[i] = 'guess well';
-        }else{
+          map.set(gus[i], map.get(gus[i]) - 1);
+        } else {
           res[i] = 'guess wrong';
         }
       }
@@ -49,43 +49,48 @@ export default function GuessBoard(props) {
     return res;
   }
 
-  function create_guessboard(){
+  function create_guessboard() {
     const guessboard = [];
     let padding = true;
-    for(let i = 0; i < row; i++){
-        const guess_row = [];
+    console.log(guess);
+    for (let i = 0; i < row; i++) {
+      const guess_row = [];
 
-        let res = [];
-        if(guessed_list[i]){
-          res = check_correct(answer, guessed_list[i]);
+      let res = [];
+      if (guessed_list[i]) {
+        res = check_correct(answer, guessed_list[i]);
+      }
+
+      for (let j = 0; j < col; j++) {
+        if (guessed_list[i]) {
+          let letter = guessed_list[i][j];
+          if (guess === '' && guessed_list[i + 1] === undefined) {
+            // add animation
+          }
+          guess_row.push(<div className={res[j]}>{letter}</div>);
+        } else if (guess[j] && padding) {
+          if (!game_state.delete && j + 1 === game_state.curr_index) {
+            guess_row.push(<div className="guess enter">{guess[j]}</div>);
+          } else {
+            guess_row.push(<div className="guess">{guess[j]}</div>);
+          }
+
+          if (j === col - 1) {
+            padding = false;
+          }
+        } else {
+          padding = false;
+          guess_row.push(<div className="guess"></div>);
         }
-
-        for(let j = 0; j < col; j++){
-            if(guessed_list[i]){
-                let letter = guessed_list[i][j];                
-                guess_row.push(<div className={res[j]}>{letter}</div>);
-            }else if(guess[j] && padding){
-                guess_row.push(<div className='guess'>{guess[j]}</div>);
-                if(j === col - 1){
-                    padding = false;
-                }
-            }else{
-                padding = false;
-                guess_row.push(<div className='guess'></div>);
-            }
-
-        }
-        guessboard.push(<div className={row_style}>{guess_row}</div>);
+      }
+      guessboard.push(<div className={row_style}>{guess_row}</div>);
     }
     return guessboard;
   }
 
-  return(
-    <div className='guess_board_container'>
-        <div className={board_style}>
-            {create_guessboard()}
-        </div>
+  return (
+    <div className="guess_board_container">
+      <div className={board_style}>{create_guessboard()}</div>
     </div>
-
   );
 }

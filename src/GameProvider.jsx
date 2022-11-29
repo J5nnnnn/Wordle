@@ -47,12 +47,14 @@ export function GameProvider(props) {
             state.curr_index === state.letter_guess
               ? state.curr_index
               : state.curr_index + 1,
+          delete: false,
         };
       case 'delete':
         return {
           ...state,
           temp_guess: state.temp_guess.slice(0, -1),
           curr_index: state.curr_index === 0 ? 0 : state.curr_index - 1,
+          delete: true,
         };
       case 'add':
         console.log('before push', state.guessed_list);
@@ -63,9 +65,19 @@ export function GameProvider(props) {
         console.log('after push', state.guessed_list);
 
         for(let i = 0; i < word.length; i++){
-          used.set(word[i], used.has(word[i])? used.get(word[i]) + 1 : 1);
+          if(used.get(word[i]) === 1){
+            continue;
+          }else{
+            if(word[i] === state.word[i]){
+              used.set(word[i], 1);
+            }else if (state.word.includes(word[i])){
+              used.set(word[i], 2);
+            }else{
+              used.set(word[i], 3);
+            }
+          }
         }
-        return { ...state, guessed_list: tmp, curr_index: 0, temp_guess: '' };
+        return { ...state, guessed_list: tmp, curr_index: 0, temp_guess: '', key_used: used};
       case 'reset':
         // will unmounting
         return { ...initialState };
@@ -100,6 +112,7 @@ export function GameProvider(props) {
     word: WORD_LIST[Math.floor(Math.random() * WORD_LIST.length)],
     curr_index: 0,
     key_used: new Map(),
+    delete: false,
   };
 
   const [game_state, dispatch] = useReducer(game_state_reducer, initialState);
