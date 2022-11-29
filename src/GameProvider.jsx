@@ -65,15 +65,15 @@ export function GameProvider(props) {
         console.log('after push', state.guessed_list);
 
         for(let i = 0; i < word.length; i++){
-          if(used.get(word[i]) === 1){
+          if(used[word[i]] === 1){
             continue;
           }else{
             if(word[i] === state.word[i]){
-              used.set(word[i], 1);
+              used[word[i]] = 1;
             }else if (state.word.includes(word[i])){
-              used.set(word[i], 2);
+              used[word[i]] = 2;
             }else{
-              used.set(word[i], 3);
+              used[word[i]] = 3;
             }
           }
         }
@@ -111,7 +111,7 @@ export function GameProvider(props) {
     guessed_list: [],
     word: WORD_LIST[Math.floor(Math.random() * WORD_LIST.length)],
     curr_index: 0,
-    key_used: new Map(),
+    key_used: {},
     delete: false,
   };
 

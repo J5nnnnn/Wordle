@@ -129,10 +129,10 @@ export default function Keyboard(props){
             row.forEach((keys)=>{
                 let temp;
                 let type = "key";
-                if(used.has(keys)){
-                    if(used.get(keys) === 1){
+                if(used[keys]){
+                    if(used[keys] === 1){
                         type = "key right";
-                    }else if (used.get(keys) === 2){
+                    }else if (used[keys] === 2){
                         type = "key well";
                     }else{
                         type = "key wrong";
